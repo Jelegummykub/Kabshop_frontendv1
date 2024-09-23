@@ -1,0 +1,184 @@
+.container1{
+    width: 100%;
+    /* max-width: 800px;
+    margin: 20px auto; */
+    padding: 20px;
+    /* border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff; */
+}
+
+.description-container {
+    display: flex; /* ใช้ flexbox เพื่อจัดเรียง */
+    justify-content: space-between; /* จัดให้มีช่องว่างระหว่างสองส่วน */
+    align-items: flex-start; /* จัดให้ทุกส่วนอยู่ด้านบน */
+    padding: 20px; /* เพิ่มช่องว่างรอบ ๆ */
+}
+
+.discrip1 {
+    margin-top: 80px;
+    text-align: left; /* จัดข้อความทางซ้าย */
+    margin-left: 220px; /* ปรับระยะทางซ้าย */
+}
+
+.discrip {
+    margin-left: auto; /* จัดให้เลื่อนออกไปทางขวา */
+    margin-right: 250px; /* ปรับตำแหน่งทางขวา */
+    max-width: 600px; /* ความกว้างสูงสุด */
+    text-align: justify; /* จัดข้อความให้เต็มบรรทัด */
+    font-family: Arial, sans-serif; /* ใช้ฟอนต์ */
+    font-size: 16px; /* ขนาดตัวอักษร */
+    line-height: 1.6; /* ระยะห่างระหว่างบรรทัด */
+    display: flex;
+    flex-direction: column; /* แนวตั้ง */
+    align-items: flex-start; /* จัดชิดซ้าย */
+}
+
+h1 {
+    font-size: 2.5rem; /* ปรับขนาดตัวอักษร */
+    margin-bottom: 10px; /* เพิ่มช่องว่างด้านล่าง */
+}
+
+h3 {
+    font-size: 1.5rem; /* ปรับขนาดตัวอักษร */
+    margin-bottom: 20px; /* เพิ่มช่องว่างด้านล่าง */
+}
+
+.description-text {
+    font-size: 1.1rem; /* ปรับขนาดตัวอักษร */
+    line-height: 1.6; /* เพิ่มระยะห่างระหว่างบรรทัด */
+    color: #333; /* เปลี่ยนสีตัวอักษร */
+    margin: 20px 0; /* เพิ่มช่องว่างด้านบนและด้านล่าง */
+    padding: 15px; /* เพิ่มช่องว่างภายใน */
+    border-left: 4px solid #007bff; /* เพิ่มเส้นสีด้านซ้าย */
+    background-color: rgba(255, 255, 255, 0.9); /* เพิ่มพื้นหลังให้มีความโปร่งใส */
+    border-radius: 8px; /* เพิ่มมุมโค้งให้กับกล่อง */
+}
+
+/* Media Query สำหรับจอเล็ก */
+@media (max-width: 768px) {
+    .description-container {
+        flex-direction: column; /* เปลี่ยนแนวจากแนวนอนเป็นแนวตั้ง */
+        align-items: center; /* จัดให้กลาง */
+    }
+
+    .discrip1 {
+        margin-left: 0; /* ไม่มี margin ซ้าย */
+        text-align: center; /* จัดข้อความกลาง */
+    }
+
+    .discrip {
+        margin-left: 0; /* ไม่มี margin ซ้าย */
+        margin-right: 0; /* ไม่มี margin ขวา */
+        max-width: 100%; /* ความกว้างสูงสุดเป็น 100% */
+        padding: 10px; /* เพิ่ม padding น้อยลง */
+    }
+
+    h1 {
+        font-size: 2rem; /* ขนาดตัวอักษรเล็กลง */
+    }
+
+    h3 {
+        font-size: 1.2rem; /* ขนาดตัวอักษรเล็กลง */
+    }
+
+    .description-text {
+        font-size: 1rem; /* ขนาดตัวอักษรเล็กลง */
+    }
+}
+
+.cat1{
+    font-size: 3rem;
+}
+
+.cat2{
+    font-size: 2rem;
+}
+
+.cat{
+    font-size: 2rem;
+    margin-left: 20px;
+    border-bottom: 2px solid rgb(0, 0, 0); /* เพิ่มเส้นสีขาวข้างล่าง */
+    padding-bottom: 10px;
+}
+
+.category {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* จัดให้ภาพอยู่กลาง */
+    position: relative; /* เพื่อจัดตำแหน่งปุ่มลูกศร */
+}
+
+.carousel {
+    display: flex;
+    overflow: hidden; /* ซ่อนภาพที่อยู่นอกพื้นที่ */
+    width: 100%; /* ความกว้างของ carousel */
+}
+
+.carousel-inner {
+    display: flex; /* ใช้ flexbox เพื่อจัดเรียงภาพในแถว */
+    transition: transform 0.5s ease; /* การเปลี่ยนภาพอย่างราบรื่น */
+}
+
+.carousel-item {
+    flex: 0 0 33.33%; /* แสดงภาพ 3 ภาพ */
+    margin-right: 20px; /* เพิ่มช่องว่างด้านขวาของภาพ */
+    box-sizing: border-box; /* ใช้ box-sizing เพื่อให้ padding หรือ margin ไม่กระทบขนาด */
+}
+
+.carousel-item:last-child {
+    margin-right: 0; /* ลบช่องว่างจากภาพสุดท้าย */
+}
+
+.carousel img {
+    width: 425px; /* ทำให้ภาพเต็มความกว้างของ item */
+    height: 300px; /* กำหนดความสูงที่เท่ากันสำหรับทุกรูป */
+    object-fit: cover; /* ทำให้ภาพเต็มพื้นที่และตัดส่วนที่เกิน */
+    border-radius: 8px; /* มุมโค้ง */
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white; /* สีพื้นหลังของปุ่ม */
+    border: none;
+    cursor: pointer;
+    font-size: 24px; /* ขนาดตัวอักษร */
+    z-index: 1; /* ให้อยู่เหนือ carousel */
+}
+
+.left {
+    left: 10px; /* ตำแหน่งปุ่มซ้าย */
+}
+
+.right {
+    right: 10px; /* ตำแหน่งปุ่มขวา */
+}
+
+.magin{
+    margin-top: 50px;
+}
+
+.im{
+    width: 100%;
+    height: 350px;
+    display: block;
+    border-radius: 5px;
+    filter: blur(2px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

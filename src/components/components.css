@@ -1,0 +1,223 @@
+.navbar5 {
+    background-image: url('/public/pigg/image1.png');
+    background-size: cover;
+    background-position: center;
+    height: 500px; /* ปรับความสูงตามต้องการ */
+    position: relative; /* สำหรับตำแหน่งที่ถูกจัดการ */
+}
+
+.navbar1 {
+    background-image: url('/public/pigg/image3.png');
+    background-size: cover;
+    background-position: center;
+    height: 400px; /* ปรับความสูงตามต้องการ */
+    position: relative; /* สำหรับตำแหน่งที่ถูกจัดการ */
+}
+
+.navbar2{
+    background-image: url('/public/pigg/image4.png');
+    background-size: cover;
+    background-position: center;
+    height: 400px; /* ปรับความสูงตามต้องการ */
+    position: relative; /* สำหรับตำแหน่งที่ถูกจัดการ */
+}
+
+.navbar3{
+    background-image: url('/public/pigg/image5.png');
+    background-size: cover;
+    background-position: center;
+    height: 400px; /* ปรับความสูงตามต้องการ */
+    position: relative; /* สำหรับตำแหน่งที่ถูกจัดการ */
+}
+
+.navbar4{
+    background-image: url('/public/pigg/image6.png');
+    background-size: cover;
+    background-position: center;
+    height: 400px; /* ปรับความสูงตามต้องการ */
+    position: relative; /* สำหรับตำแหน่งที่ถูกจัดการ */
+}
+
+.con {
+    position: absolute; /* ใช้ absolute position */
+    top: 10px; /* ให้ element อยู่ที่ด้านบนสุด */
+    left: 50%; /* อยู่กลางแนวนอน */
+    transform: translateX(-50%); /* ปรับตำแหน่งให้ตรงกลางในแนวนอน */
+    display: flex; /* ใช้ flex เพื่อจัดเรียง */
+    align-items: center; /* จัดให้ element อยู่กลางในแนวตั้ง */
+    width: 100%; /* ให้ความกว้างเต็ม */
+    border-bottom: 2px solid white; /* เพิ่มเส้นสีขาวข้างล่าง */
+    padding-bottom: 10px; /* เพิ่มช่องว่างด้านล่าง */
+}
+
+.flex-none {
+    margin: 0 10px; /* ให้ช่องว่างระหว่างปุ่มกับโลโก้ */
+}
+
+.logo-container {
+    flex: 1; /* ทำให้โลโก้อยู่ตรงกลาง */
+    display: flex;
+    justify-content: center; /* จัดให้โลโก้อยู่ตรงกลาง */
+}
+
+.navbarlogin {
+    display: flex;
+    justify-content: center; /* จัดให้เนื้อหาหลักอยู่ตรงกลาง */
+    align-items: center; /* จัดให้อยู่กึ่งกลางแนวตั้ง */
+    padding: 10px 20px;
+    position: relative;
+    border-bottom: 2px solid rgb(37, 29, 29); /* เพิ่มเส้นสีขาวข้างล่าง */
+    padding-bottom: 10px;
+}
+
+.arrow {
+    position: absolute;
+    left: 20px; /* ปรับระยะทางซ้าย (ห่างจากขอบซ้ายเล็กน้อย) */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.logo-container1 {
+    text-align: center; /* จัดโลโก้ให้อยู่ตรงกลาง */
+}
+
+.logo1 {
+    max-height: 75px; /* จำกัดความสูงของโลโก้ */
+    width: auto; /* ให้ความกว้างยืดตามขนาดโลโก้ */
+}
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* ซ่อน sidebar */
+    width: 250px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: left 0.3s ease; /* เพิ่มการเคลื่อนไหว */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    z-index: 1000; /* ทำให้ sidebar อยู่ด้านบนสุด */
+}
+
+.sidebar.open {
+    left: 0; /* แสดง sidebar */
+}
+
+.close-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+
+.logo {
+    max-height: 40px; /* ปรับความสูงของโลโก้ตามต้องการ */
+}
+
+.store-container {
+    display: flex;
+    flex-direction: column; /* ตั้งแนวแกนเป็นแนวตั้ง */
+    align-items: center; /* จัดให้กลางในแนวนอน */
+    justify-content: center; /* จัดให้กลางในแนวตั้ง */
+    height: 100vh; /* ให้เต็มความสูง */
+}
+
+.Namestore {
+    color: white; /* เปลี่ยนสีเป็นขาว */
+    font-size: 3rem; /* ปรับขนาดตัวอักษร */
+    margin-bottom: 20px; /* เพิ่มช่องว่างด้านล่าง */
+}
+
+.button-container {
+    display: flex; /* ใช้ flex เพื่อจัดเรียงปุ่ม */
+    gap: 20px; /* เพิ่มช่องว่างระหว่างปุ่ม */
+}
+
+.con1{
+    position: absolute; /* ใช้ตำแหน่ง absolute */
+    top: 50%; /* อยู่กลางแนวตั้ง */
+    left: 50%; /* อยู่กลางแนวนอน */
+    transform: translate(-50%, -50%); /* ปรับตำแหน่งให้ตรงกลาง */
+    text-align: center; /* จัดให้ข้อความอยู่กลาง */
+}
+
+.slidehome{
+    padding: 20px;
+}
+
+
+.homi1{
+    margin-right: 20px;
+}
+
+.dropdown {
+    position: relative; /* ใช้เพื่อทำให้เมนูอยู่ในตำแหน่งเดียวกับปุ่ม */
+    width: 100%; /* ทำให้ dropdown ขยายเต็มความกว้าง */
+    margin-top: 10px; /* เพิ่มช่องว่างระหว่าง dropdown และส่วนอื่น */
+}
+
+/* .dropdown summary {
+    cursor: pointer;
+    background-color: #e3e8ee;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 50%;
+    text-align: left;
+} */
+
+.dropdown-content {
+    position: absolute;
+    background-color: white; /* สีพื้นหลังของเมนู */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงา */
+    border-radius: 8px; /* มุมโค้งของเมนู */
+    display: none; /* ซ่อนเมนูเริ่มต้น */
+}
+
+/* .dropdown details[open] .dropdown-content {
+    display: block;
+} */
+
+.dropdown .menu {
+    list-style: none; /* ลบจุดลิสต์ */
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown .menu li {
+    padding: 10px; /* Padding ไอเท็มในเมนู */
+    transition: background-color 0.3s ease; /* การเปลี่ยนสีเมื่อ hover */
+}
+
+.dropdown .menu li:hover {
+    background-color: #f0f0f0; /* สีพื้นหลังเมื่อ hover */
+}
+
+.paper-text {
+    font-size: 1rem; /* ขนาดตัวอักษรของลิสต์ */
+    color: black; /* สีตัวอักษร */
+    display: block; /* ทำให้ข้อความแสดงเต็มบรรทัด */
+    padding: 10px; /* Padding ภายใน */
+    text-decoration: none; /* ลบขีดเส้นใต้ */
+}
+
+.paper-text:hover {
+    color: #959a9e; /* สีข้อความเมื่อ hover */
+}
+
+.arrow{
+    margin-left: 20px;
+}
+
