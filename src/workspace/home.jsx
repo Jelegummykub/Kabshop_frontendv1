@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import './workspace.css';
 
@@ -38,16 +39,36 @@ function Home() {
                         <div className="carousel rounded-box">
                             <div className="carousel-inner" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
                                 <div className="carousel-item">
-                                    <img src="/pigg/c1.png" alt="product image" />
+                                    <Link to="/Pen">
+                                        <img src="/pigg/c1.png" alt="product image" />
+                                        <div className='des'>
+                                            <span>Pens and Pencils</span>
+                                        </div>
+                                    </Link>
                                 </div>
                                 <div className="carousel-item">
-                                    <img src="/pigg/c2.png" alt="product image" />
+                                    <Link to="/Paper">
+                                        <img src="/pigg/c2.png" alt="product image" />
+                                        <div className='des'>
+                                            <span>Paper and Notebooks</span>
+                                        </div>
+                                    </Link>
                                 </div>
                                 <div className="carousel-item">
-                                    <img src="/pigg/c3.png" alt="product image" />
+                                    <Link to="/Art">
+                                        <img src="/pigg/c3.png" alt="product image" />
+                                        <div className='des'>
+                                            <span>Art and coloring Supplies</span>
+                                        </div>
+                                    </Link>
                                 </div>
                                 <div className="carousel-item">
-                                    <img src="/pigg/c4.png" alt="product image" />
+                                    <Link to="/Office">
+                                        <img src="/pigg/c4.png" alt="product image" />
+                                        <div className='des'>
+                                            <span>Office and School Supplies</span>
+                                        </div>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

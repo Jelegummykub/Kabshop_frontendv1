@@ -48,15 +48,14 @@ function NAvbar() {
                 </div>
                 <div className={`sidebar ${isOpen ? 'open' : ''}`}>
                     <button className="btn btn-error" onClick={toggleSidebar}>Close</button>
-                    {/* ใส่เนื้อหาสำหรับ Sidebar ที่นี่ */}
                     <div className='slidehome'>
                         <Link to="/">
                             <FontAwesomeIcon className='homi1' icon={faHouse} style={{ color: "#000000", }} />
                             <span className="home-text">Home</span>
                         </Link>
                     </div>
-                    <div className='slidehome'>
-                        <FontAwesomeIcon className='homi1' icon={faList} style={{ color: "#000000", }} />
+                    <div className='slidehome1'>
+                        <FontAwesomeIcon className='homi11' icon={faList} style={{ color: "#000000", }} />
                         <details className="dropdown">
                             <summary className="btn m-1">Cagetory</summary>
                             <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">

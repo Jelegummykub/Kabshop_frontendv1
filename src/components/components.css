@@ -161,10 +161,19 @@
     margin-right: 20px;
 }
 
+.homi11{
+    margin-left: 20px;
+}
+
 .dropdown {
-    position: relative; /* ใช้เพื่อทำให้เมนูอยู่ในตำแหน่งเดียวกับปุ่ม */
-    width: 100%; /* ทำให้ dropdown ขยายเต็มความกว้าง */
-    margin-top: 10px; /* เพิ่มช่องว่างระหว่าง dropdown และส่วนอื่น */
+    display: flex;
+    align-items: center;
+}
+
+.slidehome1 {
+    display: flex; /* ใช้ flexbox เพื่อจัดเรียงในแนวนอน */
+    align-items: center; /* จัดให้เนื้อหาอยู่กึ่งกลางแนวตั้ง */
+    gap: 5px; /* เพิ่มช่องว่างระหว่างเนื้อหา */
 }
 
 /* .dropdown summary {
