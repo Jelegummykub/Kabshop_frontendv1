@@ -38,6 +38,14 @@
     position: relative; /* สำหรับตำแหน่งที่ถูกจัดการ */
 }
 
+.navbar6{
+    background-image: url('/public/pigg/image989.png');
+    background-size: cover;
+    background-position: center;
+    height: 85px; /* ปรับความสูงตามต้องการ */
+    position: relative; /* สำหรับตำแหน่งที่ถูกจัดการ */
+}
+
 .con {
     position: absolute; /* ใช้ absolute position */
     top: 10px; /* ให้ element อยู่ที่ด้านบนสุด */

@@ -9,6 +9,148 @@
     background-color: #fff; */
 }
 
+.containers {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.containers1 {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-top: 50px;
+}
+
+.buy {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+
+
+}
+
+.name1 {
+    border-bottom: 2px solid rgb(176, 166, 166);
+    padding-bottom: 2px;
+    margin-bottom: 25px;
+    margin-top: 5px;
+}
+
+.conimg {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+
+}
+
+.conimg1{
+    width: 100%;
+    max-width: auto;
+    /* margin: 20px auto; */
+    margin-top: 20px;
+    padding: 20px;
+    border-bottom: 2px solid rgb(215, 212, 212);
+    padding-bottom: 2px;
+}
+
+.quantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quantity .btn {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+
+}
+
+.butcart {
+    margin-top: 10px;
+    justify-content: center;
+    display: flex;
+}
+
+.name {
+    font-size: 1.5rem;
+    margin-bottom: 2px;
+}
+
+.dsd {
+    margin-right: 20px;
+}
+
+.product-info {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dsd p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+}
+
+
+@media (max-width: 1024px) {
+    .containers {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .containers {
+        padding: 10px;
+    }
+
+    .conimg {
+        max-width: 90%;
+        margin: 10px auto;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .containers {
+        gap: 10px;
+    }
+
+    .conimg {
+        max-width: 100%;
+    }
+}
+
 .containerlogin {
     width: 90%;
     max-width: 800px;
@@ -21,7 +163,6 @@
     background-color: #fff;
     display: flex;
     justify-content: space-between;
-    /* align-items: center;  */
 }
 
 
@@ -32,7 +173,6 @@
     background-size: cover;
     background-position: center;
     height: 500px;
-    /* ปรับความสูงตามต้องการ */
     position: relative;
 }
 
@@ -44,11 +184,11 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
-    height: 500px; /* กำหนดความสูง */
+    height: 500px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around; /* กระจายฟอร์มในแนวตั้ง */
-    overflow-y: auto; 
+    justify-content: space-around;
+    overflow-y: auto;
 }
 
 .Login h1 {
@@ -74,7 +214,7 @@
 }
 
 .form1 {
-    margin-bottom: 10px; /* เพิ่มระยะห่างระหว่างแต่ละฟิลด์ */
+    margin-bottom: 10px;
 }
 
 
@@ -90,15 +230,11 @@
     width: 80%;
     padding: 5px;
     border: 2px solid #353636;
-    /* สีกรอบ */
     border-radius: 8px;
-    /* font-size: 1rem;
-    outline: none;
-    transition: border-color 0.3s ease; */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.input2 input{
+.input2 input {
     width: 80%;
     padding: 5px;
     border: 2px solid #353636;
@@ -111,7 +247,6 @@
 
 .input1 input:focus {
     border-color: #000000;
-    /* สีกรอบเมื่อ focus */
 }
 
 .input1 {
@@ -126,124 +261,84 @@
 
 input::placeholder {
     color: #888;
-    /* สี placeholder */
 }
 
 
 .description-container {
     display: flex;
-    /* ใช้ flexbox เพื่อจัดเรียง */
     justify-content: space-between;
-    /* จัดให้มีช่องว่างระหว่างสองส่วน */
     align-items: flex-start;
-    /* จัดให้ทุกส่วนอยู่ด้านบน */
     padding: 20px;
-    /* เพิ่มช่องว่างรอบ ๆ */
 }
 
 .discrip1 {
     margin-top: 80px;
     text-align: left;
-    /* จัดข้อความทางซ้าย */
     margin-left: 220px;
-    /* ปรับระยะทางซ้าย */
 }
 
 .discrip {
     margin-left: auto;
-    /* จัดให้เลื่อนออกไปทางขวา */
     margin-right: 250px;
-    /* ปรับตำแหน่งทางขวา */
     max-width: 600px;
-    /* ความกว้างสูงสุด */
     text-align: justify;
-    /* จัดข้อความให้เต็มบรรทัด */
     font-family: Arial, sans-serif;
-    /* ใช้ฟอนต์ */
     font-size: 16px;
-    /* ขนาดตัวอักษร */
     line-height: 1.6;
-    /* ระยะห่างระหว่างบรรทัด */
     display: flex;
     flex-direction: column;
-    /* แนวตั้ง */
     align-items: flex-start;
-    /* จัดชิดซ้าย */
 }
 
 h1 {
     font-size: 2.5rem;
-    /* ปรับขนาดตัวอักษร */
     margin-bottom: 10px;
-    /* เพิ่มช่องว่างด้านล่าง */
 }
 
 h3 {
     font-size: 1.5rem;
-    /* ปรับขนาดตัวอักษร */
     margin-bottom: 20px;
-    /* เพิ่มช่องว่างด้านล่าง */
 }
 
 .description-text {
     font-size: 1.1rem;
-    /* ปรับขนาดตัวอักษร */
     line-height: 1.6;
-    /* เพิ่มระยะห่างระหว่างบรรทัด */
     color: #333;
-    /* เปลี่ยนสีตัวอักษร */
     margin: 20px 0;
-    /* เพิ่มช่องว่างด้านบนและด้านล่าง */
     padding: 15px;
-    /* เพิ่มช่องว่างภายใน */
     border-left: 4px solid #007bff;
-    /* เพิ่มเส้นสีด้านซ้าย */
     background-color: rgba(255, 255, 255, 0.9);
-    /* เพิ่มพื้นหลังให้มีความโปร่งใส */
     border-radius: 8px;
-    /* เพิ่มมุมโค้งให้กับกล่อง */
 }
 
-/* Media Query สำหรับจอเล็ก */
 @media (max-width: 768px) {
     .description-container {
         flex-direction: column;
-        /* เปลี่ยนแนวจากแนวนอนเป็นแนวตั้ง */
         align-items: center;
-        /* จัดให้กลาง */
     }
 
     .discrip1 {
         margin-left: 0;
-        /* ไม่มี margin ซ้าย */
         text-align: center;
-        /* จัดข้อความกลาง */
     }
 
     .discrip {
         margin-left: 0;
-        /* ไม่มี margin ซ้าย */
         margin-right: 0;
-        /* ไม่มี margin ขวา */
         max-width: 100%;
-        /* ความกว้างสูงสุดเป็น 100% */
         padding: 10px;
-        /* เพิ่ม padding น้อยลง */
     }
 
     h1 {
         font-size: 2rem;
-        /* ขนาดตัวอักษรเล็กลง */
     }
 
     h3 {
         font-size: 1.2rem;
-        /* ขนาดตัวอักษรเล็กลง */
     }
 
     .description-text {
         font-size: 1rem;
-        /* ขนาดตัวอักษรเล็กลง */
     }
 }
 
@@ -259,7 +354,6 @@ h3 {
     font-size: 2rem;
     margin-left: 20px;
     border-bottom: 2px solid rgb(0, 0, 0);
-    /* เพิ่มเส้นสีขาวข้างล่าง */
     padding-bottom: 10px;
 }
 
@@ -268,81 +362,54 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* จัดให้ภาพอยู่กลาง */
     position: relative;
-    /* เพื่อจัดตำแหน่งปุ่มลูกศร */
 }
 
 .carousel {
     display: flex;
     overflow: hidden;
-    /* ซ่อนภาพที่อยู่นอกพื้นที่ */
     width: 100%;
-    /* ความกว้างของ carousel */
 }
 
 .carousel-inner {
     display: flex;
-    /* ใช้ flexbox เพื่อจัดเรียงภาพในแถว */
     transition: transform 0.5s ease;
-    /* การเปลี่ยนภาพอย่างราบรื่น */
 }
 
-/* .carousel-item {
-    flex: 0 0 33.33%;
-    margin-right: 20px;
-    box-sizing: border-box;
-} */
+
 
 .carousel-item {
     position: relative;
-    /* เพื่อให้สามารถใช้ตำแหน่ง absolute สำหรับข้อความ */
     overflow: hidden;
-    /* ป้องกันข้อความล débordement */
 }
 
 .carousel-item img {
     width: 100%;
-    /* ทำให้รูปภาพเต็มพื้นที่ */
     height: auto;
-    /* ให้ความสูงยืดตามอัตราส่วน */
 }
 
 .des {
     position: absolute;
-    /* ใช้ตำแหน่ง absolute เพื่อวางข้อความบนรูป */
     bottom: 20px;
-    /* จัดให้ข้อความอยู่ห่างจากด้านล่าง */
     left: 50%;
-    /* จัดตำแหน่งที่กลางแนวนอน */
     transform: translate(-50%, 0);
-    /* เลื่อนข้อความให้ไปอยู่กลางพอดีในแนวนอน */
     color: white;
-    /* เปลี่ยนสีข้อความให้มองเห็นได้ชัด */
     background-color: rgba(0, 0, 0, 0.5);
-    /* เพิ่มพื้นหลังโปร่งใสเพื่อให้ข้อความชัดเจน */
     padding: 10px;
-    /* เพิ่ม padding รอบข้อความ */
     border-radius: 5px;
-    /* ทำให้มุมของกล่องข้อความโค้ง */
     text-align: center;
-    /* จัดข้อความให้อยู่กลาง *
 }
 
 
 .carousel-item:last-child {
-    margin-right: 0; /* ลบช่องว่างจากภาพสุดท้าย */
+    margin-right: 0;
 }
 
 .carousel img {
     width: 425px;
-    /* ทำให้ภาพเต็มความกว้างของ item */
     height: 200px;
-    /* กำหนดความสูงที่เท่ากันสำหรับทุกรูป */
     object-fit: cover;
-    /* ทำให้ภาพเต็มพื้นที่และตัดส่วนที่เกิน */
     border-radius: 8px;
-    /* มุมโค้ง */
 }
 
 .carousel-control {
@@ -350,23 +417,18 @@ h3 {
     top: 50%;
     transform: translateY(-50%);
     background-color: white;
-    /* สีพื้นหลังของปุ่ม */
     border: none;
     cursor: pointer;
     font-size: 24px;
-    /* ขนาดตัวอักษร */
     z-index: 1;
-    /* ให้อยู่เหนือ carousel */
 }
 
 .left {
     left: 10px;
-    /* ตำแหน่งปุ่มซ้าย */
 }
 
 .right {
     right: 10px;
-    /* ตำแหน่งปุ่มขวา */
 }
 
 .magin {
@@ -384,22 +446,132 @@ h3 {
 .button-container {
     display: flex;
     justify-content: center;
-    /* จัดให้อยู่ตรงกลางตามแนวแกน X */
     align-items: center;
-    /* จัดให้อยู่ตรงกลางตามแนวแกน Y (ถ้าต้องการในกรณีที่ container มีความสูง) */
     height: 100px;
-    /* สามารถปรับความสูงได้ตามต้องการ */
     border-bottom: 2px solid rgb(176, 166, 166);
-    /* เพิ่มเส้นสีขาวข้างล่าง */
     padding-bottom: 2px;
     margin-bottom: 25px;
 }
 
-.button-container1{
+.button-container1 {
     display: flex;
     justify-content: center;
-    /* จัดให้อยู่ตรงกลางตามแนวแกน X */
     align-items: center;
-    /* จัดให้อยู่ตรงกลางตามแนวแกน Y (ถ้าต้องการในกรณีที่ container มีความสูง) */
     height: 100px;
+}
+
+.containerproduct {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    margin-top: 80px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.product-item {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Addremove {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.btn {
+    margin: 0 10px;
+    padding: 10px;
+    flex: 1;
+    max-width: 100px;
+    border-radius: 8px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 2;
+}
+
+.btn:hover {
+    background-color: #555;
+}
+
+@media (max-width: 768px) {
+    .btn {
+        padding: 8px;
+        font-size: 0.9rem;
+        margin: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        padding: 12px;
+        font-size: 1rem;
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 10px;
+    }
+
+    .product-item {
+        padding: 15px;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .btn {
+        width: 100%;
+        margin: 5px 0;
+        padding: 10px;
+        font-size: 1rem;
+    }
+}
+
+.proimg {
+    margin-bottom: 20px;
+}
+
+.priceandbutton {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.priceandbutton p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.priceandbutton .btn {
+    margin-left: 10px;
+    width: 20px;
 }
