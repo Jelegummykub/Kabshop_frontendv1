@@ -64,7 +64,7 @@
 
 }
 
-.conimg1{
+.conimg1 {
     width: 100%;
     max-width: auto;
     /* margin: 20px auto; */
@@ -189,6 +189,19 @@
     flex-direction: column;
     justify-content: space-around;
     overflow-y: auto;
+}
+
+.containerfrom1 {
+    width: 60%;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .Login h1 {
@@ -574,4 +587,172 @@ h3 {
 .priceandbutton .btn {
     margin-left: 10px;
     width: 20px;
+}
+
+
+.containerprofile {
+    width: 100%;
+    /* max-width: 800px; */
+    margin: 20px auto;
+    padding: 20px;
+    margin-top: 50px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.picprofile img {
+    height: 80px;
+    width: 80px;
+    margin-left: 30px;
+    border-radius: 45%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.mid {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.laoutfront h1 {
+    text-align: center;
+    font-size: 26px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.laoutinput {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.laoutinput label {
+    width: 120px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input-field {
+    width: 35%;
+    /* ทำให้ input ขยายเต็มที่เท่ากับพื้นที่ที่มี */
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+.laoutbutton {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+.error-message {
+    color: red;
+    margin-bottom: 20px;
+}
+
+.loading-message {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.Addremove {
+    background-color: #f9f9f9;
+    /* Light background color */
+    padding: 20px;
+    /* Padding for the container */
+    border-radius: 8px;
+    /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    margin-bottom: 20px;
+    /* Space below the container */
+    display: grid;
+    width: 100%;
+}
+
+.Addremove h3 {
+    font-size: 24px;
+    /* Header font size */
+    margin-bottom: 15px;
+    /* Space below the header */
+    color: #333;
+    /* Header color */
+}
+
+.Addremove input {
+    width: 100%;
+    /* Full width input fields */
+    padding: 10px;
+    /* Padding for input fields */
+    margin: 10px 0;
+    /* Space above and below the input fields */
+    border: 1px solid #ccc;
+    /* Light border */
+    border-radius: 4px;
+    /* Rounded corners for input fields */
+    transition: border-color 0.3s;
+    /* Smooth transition for focus */
+}
+
+.Addremove input:focus {
+    border-color: #007bff;
+    /* Blue border on focus */
+    outline: none;
+    /* Remove outline */
+}
+
+.button-container {
+    display: flex;
+    /* Use flexbox for layout */
+    justify-content: space-between;
+    /* Space between buttons */
+    margin: 10px 0;
+    /* Margin above and below button container */
+}
+
+.product-edit {
+    background-color: #ffffff;
+    /* White background for product edit section */
+    border: 1px solid #ccc;
+    /* Light border */
+    border-radius: 4px;
+    /* Rounded corners */
+    padding: 15px;
+    /* Padding for product edit section */
+    margin: 10px 0;
+    /* Space around product edit section */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+}
+
+.product-edit h4 {
+    font-size: 20px;
+    /* Font size for product title */
+    color: #333;
+    /* Color for product title */
+}
+
+.product-edit button {
+    width: 100%;
+    /* Full width buttons */
+}
+
+.product-edit button.btn-error {
+    background-color: #dc3545;
+    /* Red background for delete button */
+}
+
+.product-edit button.btn-error:hover {
+    background-color: #c82333;
+    /* Darker red on hover */
 }

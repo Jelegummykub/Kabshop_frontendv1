@@ -1,14 +1,29 @@
 import { faCartShopping, faHouse, faList, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './components.css';
 
 function NAvbar() {
-    const [isOpen, setIsOpen] = useState(false); // สถานะเปิดปิดของ sidebar
+    const [isOpen, setIsOpen] = useState(false); // Sidebar open/close state
+    const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token')); // Check if user is logged in based on token
+    const navigate = useNavigate(); // Use navigate for redirecting
 
     const toggleSidebar = () => {
-        setIsOpen(!isOpen); // สลับสถานะ
+        setIsOpen(!isOpen); // Toggle sidebar state
+    };
+
+    // Function called on successful login
+    const handleLoginSuccess = () => {
+        setIsLoggedIn(true); // Set login state to true
+        navigate("/Profile"); // Navigate to Profile page
+    };
+
+    // Function to handle logout
+    const handleLogout = () => {
+        setIsLoggedIn(false); // Set login state to false
+        localStorage.removeItem('token'); // Clear the token from local storage
+        navigate("/Login"); // Navigate to Login page
     };
 
     return (
@@ -35,9 +50,20 @@ function NAvbar() {
                             <img src="/pigg/logo.png" alt="logo" className="logo" />
                         </div>
                         <div className="flex-none">
-                            <Link to="/Login" >
-                                <FontAwesomeIcon className="login" icon={faUser} style={{ color: "#ffffff", }} />
-                            </Link>
+                            {isLoggedIn ? (
+                                <>
+                                    <button onClick={handleLogout}>
+                                        <FontAwesomeIcon className="login" icon={faUser} style={{ color: "#ffffff" }} />
+                                    </button>
+                                    <Link to="/Profile">
+                                        <button className="btn btn-neutral">Profile</button>
+                                    </Link>
+                                </>
+                            ) : (
+                                <Link to="/Login" onClick={handleLoginSuccess}>
+                                    <FontAwesomeIcon className="login" icon={faUser} style={{ color: "#ffffff" }} />
+                                </Link>
+                            )}
                         </div>
                     </div>
                     <div className='con1'>
@@ -54,25 +80,25 @@ function NAvbar() {
                     <button className="btn btn-error" onClick={toggleSidebar}>Close</button>
                     <div className='slidehome'>
                         <Link to="/">
-                            <FontAwesomeIcon className='homi1' icon={faHouse} style={{ color: "#000000", }} />
+                            <FontAwesomeIcon className='homi1' icon={faHouse} style={{ color: "#000000" }} />
                             <span className="home-text">Home</span>
                         </Link>
                     </div>
                     <div className='slidehome1'>
-                        <FontAwesomeIcon className='homi11' icon={faList} style={{ color: "#000000", }} />
+                        <FontAwesomeIcon className='homi11' icon={faList} style={{ color: "#000000" }} />
                         <details className="dropdown">
-                            <summary className="btn m-1">Cagetory</summary>
+                            <summary className="btn m-1">Category</summary>
                             <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                                <Link to="/Pen" >
+                                <Link to="/Pen">
                                     <span className="paper-text">Pen</span>
                                 </Link>
-                                <Link to="/Paper" >
+                                <Link to="/Paper">
                                     <span className="paper-text">Paper</span>
                                 </Link>
-                                <Link to="/Art" >
+                                <Link to="/Art">
                                     <span className="paper-text">Art</span>
                                 </Link>
-                                <Link to="/Office" >
+                                <Link to="/Office">
                                     <span className="paper-text">Office</span>
                                 </Link>
                             </ul>
@@ -80,13 +106,12 @@ function NAvbar() {
                     </div>
                     <div className='slidehome'>
                         <Link to="/cart">
-                            <FontAwesomeIcon className='homi1' icon={faCartShopping} style={{ color: "#000000", }} />
+                            <FontAwesomeIcon className='homi1' icon={faCartShopping} style={{ color: "#000000" }} />
                             <span className="home-text">Cart</span>
                         </Link>
                     </div>
                 </div>
             </div>
-
         </>
     );
 }

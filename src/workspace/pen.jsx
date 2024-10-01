@@ -1,53 +1,222 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbarcat from '../components/Navbarcat';
 
 function Pen() {
-  const [products, setProducts] = useState([
-    { id: 1, name: 'Product 1' },
-    { id: 2, name: 'Product 2' },
-    { id: 3, name: 'Product 3' },
-    { id: 4, name: 'Product 4' },
-    { id: 5, name: 'Product 5' },
-    { id: 6, name: 'Product 6' }
+  const [products, setProducts] = useState([]);
+  const [role, setRole] = useState('USER');
+  const [newProduct, setNewProduct] = useState({ name: '', price: 0, discription: '', image: '', isActive: true });
+  const [selectedProductId, setSelectedProductId] = useState(null);
+  const [updatedProduct, setUpdatedProduct] = useState({ name: '', price: 0, discription: '', image: '', isActive: true });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const token = localStorage.getItem('token');
 
-
-  ]);
-
-  const addProduct = () => {
-    console.log("Adding product");
-    setProducts([...products, { id: products.length + 1, name: `Product ${products.length + 1}` }]);
-  };
-
-  const removeLastProduct = () => {
-    console.log("Removing product");
-    if (products.length > 0) {
-      setProducts(products.slice(0, -1));
+  const fetchData = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const storeId = 1;
+      const response = await axios.get(`http://localhost:3000/item/${storeId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setProducts(response.data.data || []);
+      await checkUserRole();
+    } catch (error) {
+      setError('Error fetching products. Please try again.');
+      console.error('Error fetching products:', error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  const checkUserRole = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/auth/@me', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const userData = response.data.user;
+
+      if (userData && userData.id) {
+        setRole(userData.role || 'USER');
+      } else {
+        console.error("User data does not have an ID:", userData);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        alert('Your session has expired. Please log in again.');
+      } else {
+        console.error('Error fetching user role:', error);
+      }
+    }
+  };
+
+  const createProduct = async (storeId) => {
+    setLoading(true);
+    setError('');
+    try {
+      const response = await axios.post(`http://localhost:3000/item/${storeId}`, newProduct, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setProducts((prevProducts) => [...prevProducts, response.data]);
+      setNewProduct({ name: '', price: 0, discription: '', image: '', isActive: true });
+    } catch (error) {
+      setError('Error creating product. Please try again later.');
+      console.error('Error creating product:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateProduct = async (storeId, productId) => {
+    setLoading(true);
+    setError('');
+    try {
+      const response = await axios.put(`http://localhost:3000/item/${storeId}/${productId}`, { ...updatedProduct, id: productId }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setProducts((prevProducts) =>
+        prevProducts.map((product) => (product.id === productId ? response.data : product))
+      );
+      setSelectedProductId(null);
+      setUpdatedProduct({ name: '', price: 0, discription: '', image: '', isActive: true });
+    } catch (error) {
+      setError('Error updating product. Please try again later.');
+      console.error('Error updating product:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const removeProduct = async (storeId, productId) => {
+    setLoading(true);
+    setError('');
+    try {
+      await axios.delete(`http://localhost:3000/item/${storeId}/${productId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setProducts((prevProducts) => prevProducts.filter((product) => product.id !== productId));
+      setSelectedProductId(null); // Clear selected product ID after deletion
+    } catch (error) {
+      setError('Error deleting product. Please try again later.');
+      console.error('Error deleting product:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <>
       <Navbarcat />
       <div className='containerproduct'>
-        <div className="Addremove">
-          <button className="btn btn-neutral" onClick={addProduct}>Add</button>
-          <button className="btn btn-neutral" onClick={removeLastProduct}>Remove</button>
-        </div>
+        {error && <div className="error-message">{error}</div>}
+        {loading && <div className="loading-message">Loading...</div>}
+        {role === 'ADMIN' && (
+          <div className="Addremove">
+            <h3>Create New Product</h3>
+            <input
+              type="text"
+              placeholder="Product Name"
+              value={newProduct.name}
+              onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+            />
+            <input
+              type="number"
+              placeholder="Price"
+              value={newProduct.price}
+              onChange={(e) => setNewProduct({ ...newProduct, price: Number(e.target.value) })}
+            />
+            <input
+              type="text"
+              placeholder="Description"
+              value={newProduct.description}
+              onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
+            />
+            <input
+              type="text"
+              placeholder="Image URL"
+              value={newProduct.image}
+              onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
+            />
+            <div className="button-container">
+              <button className="btn btn-neutral" onClick={() => createProduct(1)} disabled={loading}>
+                Create Product
+              </button>
+            </div>
+            <div className='product-grid'>
+              {Array.isArray(products) && products.map((product, index) => (
+                <div key={product.id} className="product-edit">
+                  <h4>Product {index + 1}: {product.name}</h4>
+                  <div className="button-container">
+                    <button className="btn btn-neutral" onClick={() => {
+                      setSelectedProductId(product.id);
+                      setUpdatedProduct({ name: product.name, price: product.price, description: product.description, image: product.image, isActive: product.isActive });
+                    }}>
+                      Edit Product
+                    </button>
+                    {selectedProductId === product.id && (
+                      <>
+                        <input
+                          type="text"
+                          placeholder="Updated Name"
+                          value={updatedProduct.name}
+                          onChange={(e) => setUpdatedProduct({ ...updatedProduct, name: e.target.value })}
+                        />
+                        <input
+                          type="number"
+                          placeholder="Updated Price"
+                          value={updatedProduct.price}
+                          onChange={(e) => setUpdatedProduct({ ...updatedProduct, price: Number(e.target.value) })}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Updated Description"
+                          value={updatedProduct.description}
+                          onChange={(e) => setUpdatedProduct({ ...updatedProduct, description: e.target.value })}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Updated Image URL"
+                          value={updatedProduct.image}
+                          onChange={(e) => setUpdatedProduct({ ...updatedProduct, image: e.target.value })}
+                        />
+                        <div className="button-container">
+                          <button className="btn btn-neutral" onClick={() => updateProduct(1, product.id)} disabled={loading}>
+                            Update Product
+                          </button>
+                          <button className="btn btn-error" onClick={() => removeProduct(1, product.id)} disabled={loading}>
+                            Delete Product
+                          </button>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        )}
 
         <div className="product-grid">
-          {products.map(product => (
+          {Array.isArray(products) && products.map((product) => (
             <div key={product.id} className="product-item">
               <div className='productall'>
                 <div className='proimg'>
-                  <img src="/public/pigg/sommai.jpg" alt="" />
+                  <img src={product.image || "/pigg/sommai.jpg"} alt={product.name} />
                 </div>
                 <div className='priceandbutton1'>
                   <h3>{product.name}</h3>
+                  <p>{product.discription}</p>
                 </div>
-                <Link to="/Product">
+                <Link to={`/product/${product.id}`}>
                   <div className='priceandbutton'>
-                    <p>500</p>
+                    <p>{product.price}</p>
                     <button className="btn btn-neutral btn-sm">Shop</button>
                   </div>
                 </Link>
@@ -56,27 +225,8 @@ function Pen() {
           ))}
         </div>
       </div>
-
     </>
   );
 }
 
 export default Pen;
-
-
-// const [quantities, setQuantities] = useState(products.map(() => 0));
-// const [itemsPerRow, setItemsPerRow] = useState(4); // กำหนดจำนวนสินค้าในแต่ละแถว
-
-// const increaseQuantity = (index) => {
-//   const newQuantities = [...quantities];
-//   newQuantities[index] += 1;
-//   setQuantities(newQuantities);
-// };
-
-// const decreaseQuantity = (index) => {
-//   const newQuantities = [...quantities];
-//   if (newQuantities[index] > 0) {
-//     newQuantities[index] -= 1;
-//     setQuantities(newQuantities);
-//   }
-// };

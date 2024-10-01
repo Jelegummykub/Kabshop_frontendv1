@@ -8,6 +8,7 @@ import Office from './workspace/office';
 import Paper from './workspace/paper';
 import Pen from './workspace/pen';
 import Product from './workspace/product';
+import Profile from './workspace/profile';
 import Register from './workspace/register';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/Register" element={<Register />} />
                 <Route path="/Product" element={<Product />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/Profile" element={<Profile />} />
             </Routes>
         </Router>
     </>
