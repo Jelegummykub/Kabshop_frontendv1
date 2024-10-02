@@ -756,3 +756,32 @@ h3 {
     background-color: #c82333;
     /* Darker red on hover */
 }
+
+.product-card {
+    border: 1px solid #ddd; /* ขอบของกรอบสินค้า */
+    border-radius: 8px; /* มุมโค้ง */
+    padding: 16px; /* เว้นระยะห่างภายในกรอบ */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* เงาใต้กรอบ */
+    transition: transform 0.2s; /* เอฟเฟกต์การเปลี่ยนแปลง */
+    background-color: #fff; /* พื้นหลังของกรอบสินค้า */
+}
+
+.product-card:hover {
+    transform: translateY(-5px); /* ขยับขึ้นเมื่อมีการ hover */
+}
+
+.product-card img {
+    max-width: 100%; /* ทำให้ภาพมีขนาดพอดีกับกรอบ */
+    height: auto; /* ให้ความสูงอัตโนมัติ */
+    border-radius: 4px; /* มุมโค้งของภาพ */
+}
+
+.product-card h4 {
+    margin: 0 0 10px; /* เว้นระยะห่างระหว่างชื่อและคำบรรยาย */
+    font-size: 1.2em; /* ขนาดตัวอักษร */
+}
+
+.product-card p {
+    margin: 5px 0; /* เว้นระยะห่างระหว่างคำบรรยาย */
+    color: #666; /* สีของข้อความ */
+}

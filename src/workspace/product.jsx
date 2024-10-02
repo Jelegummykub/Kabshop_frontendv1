@@ -1,27 +1,30 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Navbar1 from '../components/navbar1';
 
 function Product() {
-  const [products, setProducts] = useState([
-    { id: 1, name: 'Product 1' },
-  ]);
+  const { id } = useParams(); // ดึง id จาก URL
+  const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(0);
+  const cagetoy_id = 1;
 
-  const [quantities, setQuantities] = useState(products.map(() => 0));
-
-  const increaseQuantity = (index) => {
-    const newQuantities = [...quantities];
-    newQuantities[index] += 1;
-    setQuantities(newQuantities);
-  };
-
-  const decreaseQuantity = (index) => {
-    const newQuantities = [...quantities];
-    if (newQuantities[index] > 0) {
-      newQuantities[index] -= 1;
-      setQuantities(newQuantities);
-    }
-  };
+  // ดึงข้อมูลสินค้าตาม id จาก API
+  useEffect(() => {
+    fetch(`http://localhost:3000/item/${cagetoy_id}/${id}`) // ใช้ id ที่ดึงมา
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        setProduct(data.data[0]); // ตั้งค่า product เป็นข้อมูลที่ได้จาก API
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Error fetching product:', error);
+      });
+  }, [id]);
 
   return (
     <>
@@ -29,30 +32,24 @@ function Product() {
         <Navbar1 />
         <div className='containers'>
           <div className='conimg'>
-            <img src="/public/pigg/product1.png" alt="Product Image" />
+            <img src={product.image} alt={product.name} />
           </div>
           <div className='conimg'>
-            <h1 className='name'>MUJI ปากกาและไส้ปากกาเจลมูจิ แบบกด ขนาด 0.5 MM</h1>
-            <h2 className='des1'>
-              ปากกาเจลใช้หมึกเจลที่มีความข้นกว่าหมึกแบบอื่น ทำให้เขียนได้ลื่นและแห้งเร็ว ไม่ต้องกังวลเรื่องหมึกเลอะ
-            </h2>
+            <h1 className='name'>{product.name}</h1>
+            <h2 className='des1'>{product.discription}</h2> {/* ใช้ discription แทน description */}
           </div>
           <div className='conimg'>
             <div className='buy'>
-              <h1 className='name1'>MUJI ปากกาและไส้ปากกาเจลมูจิ แบบกด ขนาด 0.5 MM</h1>
+              <h1 className='name1'>{product.name}</h1>
               <div className='quantity'>
-                {products.map((product, index) => (
-                  <div key={product} className="quantity">
-                    <p>จำนวน: </p>
-                    <button
-                      className="btn btn-active btn-neutral btn-sm"
-                      onClick={() => decreaseQuantity(index)}>-</button>
-                    <span>{quantities[index]}</span>
-                    <button
-                      className="btn btn-active btn-neutral btn-sm"
-                      onClick={() => increaseQuantity(index)}>+</button>
-                  </div>
-                ))}
+                <p>จำนวน: </p>
+                <button
+                  className="btn btn-active btn-neutral btn-sm"
+                  onClick={decreaseQuantity}>-</button>
+                <span>{quantity}</span>
+                <button
+                  className="btn btn-active btn-neutral btn-sm"
+                  onClick={increaseQuantity}>+</button>
               </div>
               <div className='butcart'>
                 <button className="btn btn-active btn-neutral btn-sm">ตะกร้า</button>
@@ -67,22 +64,15 @@ function Product() {
         </div>
         <div className='product-info'>
           <div className='name'>
-            <h1>
-              เกี่ยวกับสินค้า
-            </h1>
+            <h1>เกี่ยวกับสินค้า</h1>
           </div>
           <div className='dsd'>
-            <p>
-              เขียนได้ราบรื่น: ไม่ว่าจะเป็นการจดบันทึกในห้องเรียน การทำงานในสำนักงาน หรือการสร้างสรรค์งานศิลปะ
-              ปากกาเจลจะทำให้การเขียนของคุณลื่นไหลและไม่มีสะดุด
-              สีไม่จางง่าย: สีของหมึกเจลมีความคงทน ไม่จางง่าย ทำให้ข้อความและภาพวาดของคุณคงอยู่ได้นาน
-              เหมาะสำหรับทุกเพศทุกวัย: ไม่ว่าคุณจะเป็นนักเรียน นักศึกษา นักธุรกิจ หรือศิลปิน ปากกาเจลเป็นตัวเลือกที่ดีสำหรับทุกคน
-            </p>
+            <p>{product.discription}</p> {/* ใช้ discription แทน description */}
           </div>
         </div>
       </div>
     </>
-  )
+  );
 }
 
 export default Product;
