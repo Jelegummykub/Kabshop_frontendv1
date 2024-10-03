@@ -1,75 +1,86 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Navbar1 from '../components/navbar1';
 
 function Product() {
-  const { id } = useParams(); // ดึง id จาก URL
+  const { id } = useParams(); // Get ID from URL
   const [product, setProduct] = useState(null);
-  const [quantity, setQuantity] = useState(0);
-  const cagetoy_id = 1;
+  const [error, setError] = useState(null);
 
-  // ดึงข้อมูลสินค้าตาม id จาก API
   useEffect(() => {
-    fetch(`http://localhost:3000/item/${cagetoy_id}/${id}`) // ใช้ id ที่ดึงมา
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        setProduct(data.data[0]); // ตั้งค่า product เป็นข้อมูลที่ได้จาก API
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error fetching product:', error);
-      });
+    const fetchProduct = async () => {
+      console.log(`ID before request: ${id}`); // Log ID
+
+      const itemId = parseInt(id);
+      console.log(`ID type: ${typeof id}, Parsed ID: ${itemId}`); // Log ID type and parsed ID
+
+      if (isNaN(itemId)) {
+        setError("Invalid Product ID");
+        return;
+      }
+
+      console.log(`Fetching product with ID: ${itemId}`);
+      try {
+        const response = await axios.get(`http://localhost:3000/item/${itemId}`);
+        console.log('Product fetched:', response.data);
+        setProduct(response.data.data); // Access the product data correctly
+      } catch (error) {
+        console.error('Error fetching product:', error.response);
+        setError(`Error fetching product: ${error.response ? error.response.data.msg : error.message}`);
+      }
+    };
+
+    fetchProduct();
   }, [id]);
+
+  const handleAddToCart = async () => {
+    // Check if the user is logged in by looking for a token in local storage
+    const token = localStorage.getItem('token'); // Replace with your token storage logic
+
+    if (!token) {
+      setError("กรุณาเข้าสู่ระบบเพื่อเพิ่มสินค้าลงในตะกร้า"); // "Please log in to add products to the cart"
+      return;
+    }
+
+    try {
+      // Make sure to replace ':itemId' with the actual product ID
+      const response = await axios.post(`http://localhost:3000/cart/${product.id}`, {
+        quantity: 1 // You can modify this as needed
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}` // Send the token in the request header
+        }
+      });
+      console.log('Product added to cart:', response.data);
+      // Optionally redirect to cart or show a success message
+    } catch (error) {
+      console.error('Error adding to cart:', error.response ? error.response.data.msg : error.message);
+    }
+  };
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
       <div>
-        <Navbar1 />
-        <div className='containers'>
-          <div className='conimg'>
-            <img src={product.image} alt={product.name} />
-          </div>
-          <div className='conimg'>
-            <h1 className='name'>{product.name}</h1>
-            <h2 className='des1'>{product.discription}</h2> {/* ใช้ discription แทน description */}
-          </div>
-          <div className='conimg'>
-            <div className='buy'>
-              <h1 className='name1'>{product.name}</h1>
-              <div className='quantity'>
-                <p>จำนวน: </p>
-                <button
-                  className="btn btn-active btn-neutral btn-sm"
-                  onClick={decreaseQuantity}>-</button>
-                <span>{quantity}</span>
-                <button
-                  className="btn btn-active btn-neutral btn-sm"
-                  onClick={increaseQuantity}>+</button>
-              </div>
-              <div className='butcart'>
-                <button className="btn btn-active btn-neutral btn-sm">ตะกร้า</button>
-              </div>
-              <Link to="/cart">
-                <div className='butcart'>
-                  <button className="btn btn-active btn-neutral btn-sm">ชื้อสินค้า</button>
-                </div>
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className='product-info'>
-          <div className='name'>
-            <h1>เกี่ยวกับสินค้า</h1>
-          </div>
-          <div className='dsd'>
-            <p>{product.discription}</p> {/* ใช้ discription แทน description */}
-          </div>
-        </div>
+        <h1>{product.name}</h1>
+        <p>{product.discription}</p>
+        <p>Price: ${product.price}</p>
+        <img src={product.image} alt={product.name} />
+      </div>
+      <div>
+        <button className="btn btn-neutral" onClick={handleAddToCart}>
+          Add to Cart
+        </button>
+        <Link to='/cart'>
+          <button className="btn btn-neutral">Go to Cart</button>
+        </Link>
       </div>
     </>
   );

@@ -38,7 +38,6 @@ function Pen() {
       const response = await axios.post(`http://localhost:3000/item/${cagetoryId}`, newProduct, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      // Update the products state with the newly created product
       setProducts((prevProducts) => [...(prevProducts || []), response.data.data]);
       setNewProduct({ name: '', price: 0, discription: '', image: '', isActive: true });
     } catch (error) {
@@ -114,18 +113,10 @@ function Pen() {
       <div className='containerproduct'>
         {error && <div className="error-message">{error}</div>}
 
-        {/* Loading state */}
         {loading && <div className="loading-message">Loading...</div>}
 
-        {/* If products are available, display them */}
+        {!loading && products.length === 0 && <div>No products found in the database.</div>}
 
-
-        {/* Display message if no products are found */}
-        {!loading && products.length === 0 && (
-          <div>No products found in the database.</div>
-        )}
-
-        {/* ADMIN role section for creating products */}
         {role === 'ADMIN' && (
           <div className="Addremove">
             <h3>Create New Product</h3>
@@ -161,7 +152,6 @@ function Pen() {
           </div>
         )}
 
-        {/* ADMIN role section for editing/removing products */}
         {role === 'ADMIN' && (
           <div className="product-grid">
             {products.map((product, index) => (
@@ -169,7 +159,8 @@ function Pen() {
                 <h4>Product {index + 1}: {product.name}</h4>
                 <p>Description: {product.discription}</p>
                 <p>Price: ${product.price}</p>
-                <img src={product.image} alt={product.name} width="100" />
+                <p>Status: {product.isActive ? 'Available' : 'Unavailable'}</p>
+                <p>Image: {product.image ? <img src={product.image} alt={product.name} /> : 'No image available'}</p>
                 <div className="button-container">
                   <button
                     className="btn btn-neutral"
@@ -235,26 +226,33 @@ function Pen() {
             ))}
           </div>
         )}
+
         {!loading && products.length > 0 && (
           <>
             <h3>Existing Products</h3>
             <div className="product-grid">
               {products.map((product, index) => (
-                <div key={product.id} className="product-card">
-                  <h4>Product {index + 1}: {product.name}</h4>
-                  <p>Description: {product.discription}</p>
-                  <p>Price: ${product.price}</p>
-                  {/* ใช้ style หรือ class เพื่อควบคุมการแสดงผล */}
-                  <img src={product.image} alt={product.name} style={{ maxWidth: '100%', height: 'auto' }} />
-                  <Link to={`/Product/${product.id}`}>
-                    <button className="btn btn-neutral">View Product</button>
-                  </Link>
-                </div>
+                product ? (
+                  <div key={product.id} className="product-card">
+                    <h4>Product {index + 1}: {product.name}</h4>
+                    <p>Description: {product.discription || 'No description available'}</p>
+                    <p>Price: ${product.price || 'N/A'}</p>
+                    {product.image ? (
+                      <img src={product.image} alt={product.name} />
+                    ) : (
+                      <p>No image available</p>
+                    )}
+                    {role === 'USER' && (
+                      <Link to={`/item/${product.id}`} className="btn btn-primary">
+                        Buy Now
+                      </Link>
+                    )}
+                  </div>
+                ) : null
               ))}
             </div>
           </>
         )}
-
       </div>
     </>
   );

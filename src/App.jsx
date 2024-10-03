@@ -13,23 +13,21 @@ import Register from './workspace/register';
 
 function App() {
   return (
-    <>
-      <Router>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/Pen" element={<Pen />} />
-                <Route path="/Paper" element={<Paper />} />
-                <Route path="/Art" element={<Art />} />
-                <Route path="/Office" element={<Office />} />
-                <Route path="/Login" element={<Login />} />
-                <Route path="/Register" element={<Register />} />
-                <Route path="/Product/:id" element={<Product />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/Profile" element={<Profile />} />
-            </Routes>
-        </Router>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Pen" element={<Pen />} />
+        <Route path="/Paper" element={<Paper />} />
+        <Route path="/Art" element={<Art />} />
+        <Route path="/Office" element={<Office />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
+        <Route path="/item/:id" element={<Product />} /> {/* ใช้ element แทน component */}
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/Profile" element={<Profile />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
