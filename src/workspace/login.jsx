@@ -11,6 +11,7 @@ function Login() {
   useEffect(() => {
     // Check if user is already logged in
     const token = localStorage.getItem('token');
+    console.log(token)
     if (token) {
       navigate('/Profile'); // Redirect to Profile if already logged in
     }
@@ -74,7 +75,7 @@ function Login() {
               />
             </div>
           </div>
-          <div className="button-container">
+          <div className="button-container12">
             <button
               className="btn btn-active bg-[#6F5039] text-white"
               onClick={handleLogin}

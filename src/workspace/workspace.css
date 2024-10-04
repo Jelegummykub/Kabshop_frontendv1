@@ -80,7 +80,7 @@
     align-items: center;
 }
 
-.quantity .btn {
+/* .quantity .btn {
     width: 20px;
     height: 20px;
     display: flex;
@@ -88,7 +88,7 @@
     justify-content: center;
     margin: 0 10px;
 
-}
+} */
 
 .butcart {
     margin-top: 10px;
@@ -456,7 +456,7 @@ h3 {
     filter: blur(2px);
 }
 
-.button-container {
+.button-container12 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -464,6 +464,13 @@ h3 {
     border-bottom: 2px solid rgb(176, 166, 166);
     padding-bottom: 2px;
     margin-bottom: 25px;
+}
+
+.buttonbuy{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
 }
 
 .button-container1 {
@@ -584,10 +591,10 @@ h3 {
     font-size: 1rem;
 }
 
-.priceandbutton .btn {
+/* .priceandbutton .btn {
     margin-left: 10px;
     width: 20px;
-}
+} */
 
 
 .containerprofile {
@@ -785,3 +792,152 @@ h3 {
     margin: 5px 0; /* เว้นระยะห่างระหว่างคำบรรยาย */
     color: #666; /* สีของข้อความ */
 }
+
+/* .buttonbuy{
+    display: flex;
+    justify-items: center;
+    margin-right: 20px;
+} */
+
+.containerproduct1 {
+    border: 1px solid #ccc; /* ขอบรอบๆ */
+    border-radius: 8px; /* มุมโค้ง */
+    padding: 20px; /* ระยะห่างภายใน */
+    text-align: center; /* จัดข้อความให้อยู่ตรงกลาง */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงา */
+    margin: 20px auto; /* ระยะห่างด้านบนและล่าง */
+    max-width: 400px; /* ขนาดสูงสุดของคอนเทนเนอร์ */
+    background-color: #ffffff; /* พื้นหลังสีขาว */
+}
+
+.containerproduct1 img {
+    width: 100%; /* ทำให้รูปภาพมีความกว้าง 100% ของคอนเทนเนอร์ */
+    height: auto; /* ทำให้ความสูงเป็นอัตโนมัติ */
+    border-radius: 8px; /* มุมโค้งให้กับรูปภาพ */
+}
+
+.containerproduct1 h1 {
+    font-size: 24px; /* ขนาดฟอนต์ */
+    color: #333; /* สีฟอนต์ */
+    margin: 10px 0; /* ระยะห่างด้านบนและล่าง */
+}
+
+.containerproduct1 p {
+    font-size: 16px; /* ขนาดฟอนต์ */
+    color: #666; /* สีฟอนต์ */
+    margin: 5px 0; /* ระยะห่างด้านบนและล่าง */
+}
+
+
+.button-container123 {
+    display: flex; /* ใช้ Flexbox เพื่อจัดเรียง */
+    justify-content: center; /* จัดให้ตรงกลาง */
+    margin-top: 10px; /* ระยะห่างด้านบน */
+}
+
+
+/* ตั้งค่าพื้นฐาน */
+
+
+/* สไตล์คอนเทนเนอร์ */
+.container32 {
+    max-width: 800px; /* ขนาดสูงสุดของคอนเทนเนอร์ */
+    margin: 20px auto; /* จัดกลาง */
+    padding: 20px; /* ระยะห่างภายใน */
+    background-color: #fff; /* พื้นหลังสีขาว */
+    border-radius: 10px; /* มุมโค้ง */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงา */
+}
+
+/* สไตล์หัวข้อ */
+.container32 h1 {
+    text-align: center; /* จัดกลาง */
+    color: #333; /* สีข้อความ */
+}
+
+/* สไตล์รายการในตะกร้า */
+.container32 ul {
+    list-style-type: none; /* ไม่มีสัญลักษณ์รายการ */
+    padding: 0; /* ไม่มีระยะห่าง */
+}
+
+.container32 li {
+    border-bottom: 1px solid #e0e0e0; /* เส้นขอบด้านล่าง */
+    padding: 15px 0; /* ระยะห่างภายใน */
+    display: flex; /* ใช้ Flexbox */
+    flex-direction: column; /* แนวตั้ง */
+}
+
+.container32 h2 {
+    font-size: 18px; /* ขนาดฟอนต์ */
+    margin: 0; /* ไม่มีระยะห่าง */
+    color: #000000; /* สีน้ำเงิน */
+}
+
+/* สไตล์ข้อมูลสินค้า */
+.container32 p {
+    margin: 5px 0; /* ระยะห่างบนและล่าง */
+    color: #555; /* สีข้อความ */
+}
+
+
+
+/* สไตล์สรุปราคา */
+.container32 h3 {
+    margin-top: 20px; /* ระยะห่างด้านบน */
+    text-align: center; /* จัดกลาง */
+    color: #333; /* สีข้อความ */
+    font-size: 20px; /* ขนาดฟอนต์ */
+}
+
+.putin {
+    width: 60px; /* กำหนดความกว้างของ input */
+    padding: 10px; /* ระยะห่างภายใน */
+    border: 1px solid #6F5039; /* เส้นขอบสีเทา */
+    border-radius: 5px; /* มุมโค้ง */
+    font-size: 16px; /* ขนาดฟอนต์ */
+    transition: border-color 0.3s; /* เอฟเฟกต์การเปลี่ยนแปลงเมื่อโฟกัส */
+    margin-bottom: 20px;
+}
+
+.containerproduct12 {
+    border: 1px solid #ccc; /* ขอบรอบๆ */
+    border-radius: 8px; /* มุมโค้ง */
+    padding: 20px; /* ระยะห่างภายใน */
+    text-align: center; /* จัดข้อความให้อยู่ตรงกลาง */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงา */
+    margin: 20px auto; /* ระยะห่างด้านบนและล่าง */
+    background-color: #ffffff; /* พื้นหลังสีขาว */
+    width: 90%;
+}
+
+.qrcode{
+    display: flex;
+    flex-direction: column; /* จัดให้อยู่เป็นแนวตั้ง */
+    justify-content: center; /* จัดองค์ประกอบให้อยู่กลางแนวตั้ง */
+    align-items: center; /* จัดองค์ประกอบให้อยู่กลางแนวนอน */
+    text-align: center;
+    margin: 20px;
+}
+
+.qrcode img{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.quantity-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .putin {
+    width: 50px;
+    text-align: center;
+    padding: 5px;
+    margin: 0 5px;
+  }
+  
+
+  

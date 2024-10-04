@@ -456,7 +456,6 @@ function Pen() {
 
         {!loading && products.length > 0 && (
           <>
-            <h3>Existing Products</h3>
             <div className="product-grid">
               {products.map((product, index) => (
                 product ? (

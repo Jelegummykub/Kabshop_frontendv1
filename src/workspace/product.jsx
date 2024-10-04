@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Navbar1 from '../components/navbar1';
 
 function Product() {
   const { id } = useParams(); // Get ID from URL
@@ -51,6 +52,7 @@ function Product() {
           Authorization: `Bearer ${token}` // Send the token in the request header
         }
       });
+      alert('Add Product Success')
       console.log('Product added to cart:', response.data);
       // Optionally redirect to cart or show a success message
     } catch (error) {
@@ -68,19 +70,22 @@ function Product() {
 
   return (
     <>
+      <Navbar1 />
       <div>
-        <h1>{product.name}</h1>
-        <p>{product.discription}</p>
-        <p>Price: ${product.price}</p>
-        <img src={product.image} alt={product.name} />
-      </div>
-      <div>
-        <button className="btn btn-neutral" onClick={handleAddToCart}>
-          Add to Cart
-        </button>
-        <Link to='/cart'>
-          <button className="btn btn-neutral">Go to Cart</button>
-        </Link>
+        <div className='containerproduct1'>
+          <img src={product.image} alt={product.name} />
+          <h1>{product.name}</h1>
+          <p>{product.discription}</p>
+          <p>Price: ${product.price}</p>
+          <div className='button-container123'>
+            <button className="btn btn-active bg-[#F8C794] text-white" onClick={handleAddToCart}>
+              Add to Cart
+            </button>
+            <Link to='/cart'>
+              <button className="btn btn-active bg-[#6F5039] text-white">Go to Cart</button>
+            </Link>
+          </div>
+        </div>
       </div>
     </>
   );

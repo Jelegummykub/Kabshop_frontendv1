@@ -1,14 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Navbaroff from '../components/Navbaroff';
-
+import NavbarOffice from '../components/Navbaroff';
 function Office() {
   const [products, setProducts] = useState([]);
   const [role, setRole] = useState('USER');
-  const [newProduct, setNewProduct] = useState({ name: '', price: 0, discription: '', image: '', isActive: true });
+  const [newProduct, setNewProduct] = useState({ name: '', price: 0, discription: '', image: '', amount: 0, isActive: true });
   const [selectedProductId, setSelectedProductId] = useState(null);
-  const [updatedProduct, setUpdatedProduct] = useState({ name: '', price: 0, discription: '', image: '', isActive: true });
+  const [updatedProduct, setUpdatedProduct] = useState({ name: '', price: 0, discription: '', image: '', amount: 0, isActive: true });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const token = localStorage.getItem('token');
@@ -39,7 +38,7 @@ function Office() {
         headers: { Authorization: `Bearer ${token}` },
       });
       setProducts((prevProducts) => [...(prevProducts || []), response.data.data]);
-      setNewProduct({ name: '', price: 0, discription: '', image: '', isActive: true });
+      setNewProduct({ name: '', price: 0, discription: '', image: '', amount: 0, isActive: true });
     } catch (error) {
       setError('Error creating product. Please try again later.');
       console.error('Error creating product:', error);
@@ -59,7 +58,7 @@ function Office() {
         (prevProducts || []).map((product) => (product.id === productId ? response.data.data : product))
       );
       setSelectedProductId(null);
-      setUpdatedProduct({ name: '', price: 0, discription: '', image: '', isActive: true });
+      setUpdatedProduct({ name: '', price: 0, discription: '', image: '', amount: 0, isActive: true });
     } catch (error) {
       setError('Error updating product. Please try again later.');
       console.error('Error updating product:', error);
@@ -109,7 +108,7 @@ function Office() {
 
   return (
     <>
-      <Navbaroff />
+      <NavbarOffice />
       <div className='containerproduct'>
         {error && <div className="error-message">{error}</div>}
 
@@ -139,6 +138,12 @@ function Office() {
               onChange={(e) => setNewProduct({ ...newProduct, discription: e.target.value })}
             />
             <input
+              type="number"
+              placeholder="Amount"
+              value={newProduct.amount}
+              onChange={(e) => setNewProduct({ ...newProduct, amount: Number(e.target.value) })}
+            />
+            <input
               type="text"
               placeholder="Image URL"
               value={newProduct.image}
@@ -156,11 +161,12 @@ function Office() {
           <div className="product-grid">
             {products.map((product, index) => (
               <div key={product.id} className="product-edit">
+                <p>Image: {product.image ? <img src={product.image} alt={product.name} /> : 'No image available'}</p>
                 <h4>Product {index + 1}: {product.name}</h4>
                 <p>Description: {product.discription}</p>
                 <p>Price: ${product.price}</p>
+                <p>Amount: {product.amount}</p>
                 <p>Status: {product.isActive ? 'Available' : 'Unavailable'}</p>
-                <p>Image: {product.image ? <img src={product.image} alt={product.name} /> : 'No image available'}</p>
                 <div className="button-container">
                   <button
                     className="btn btn-neutral"
@@ -171,6 +177,7 @@ function Office() {
                         price: product.price,
                         discription: product.discription,
                         image: product.image,
+                        amount: product.amount,
                         isActive: product.isActive,
                       });
                     }}
@@ -196,6 +203,12 @@ function Office() {
                         placeholder="Updated Description"
                         value={updatedProduct.discription}
                         onChange={(e) => setUpdatedProduct({ ...updatedProduct, discription: e.target.value })}
+                      />
+                      <input
+                        type="number"
+                        placeholder="Updated amount"
+                        value={updatedProduct.amount}
+                        onChange={(e) => setUpdatedProduct({ ...updatedProduct, amount: Number(e.target.value) })}
                       />
                       <input
                         type="text"
@@ -229,23 +242,26 @@ function Office() {
 
         {!loading && products.length > 0 && (
           <>
-            <h3>Existing Products</h3>
             <div className="product-grid">
               {products.map((product, index) => (
                 product ? (
                   <div key={product.id} className="product-card">
-                    <h4>Product {index + 1}: {product.name}</h4>
-                    <p>Description: {product.discription || 'No description available'}</p>
-                    <p>Price: ${product.price || 'N/A'}</p>
                     {product.image ? (
                       <img src={product.image} alt={product.name} />
                     ) : (
                       <p>No image available</p>
                     )}
+                    <h4>Product {index + 1}: {product.name}</h4>
+                    <p>Description: {product.discription || 'No description available'}</p>
+                    <p>Price: ${product.price || 'N/A'}</p>
+                    <p>Amount: {product.amount || 'N/A'}</p>
                     {role === 'USER' && (
-                      <Link to={`/item/${product.id}`} className="btn btn-primary">
-                        Buy Now
-                      </Link>
+                      <div className='buttonbuy'>
+                        <Link to={`/item/${product.id}`} className="btn btn-active bg-[#6F5039] text-white">
+                          Buy Now
+                        </Link>
+                      </div>
+
                     )}
                   </div>
                 ) : null
@@ -254,6 +270,7 @@ function Office() {
           </>
         )}
       </div>
+
     </>
   );
 }

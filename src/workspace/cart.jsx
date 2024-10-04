@@ -1,31 +1,31 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Navbar1 from '../components/navbar1';
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [error, setError] = useState(null);
+  const [totalPrice, setTotalPrice] = useState(0); // For total price
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCartItems = async () => {
-      const token = localStorage.getItem('token'); // Get token from local storage
+      const token = localStorage.getItem('token');
 
       if (!token) {
-        setError("กรุณาเข้าสู่ระบบเพื่อดูตะกร้าสินค้า"); // "Please log in to view your cart"
+        setError("กรุณาเข้าสู่ระบบเพื่อดูตะกร้าสินค้า");
         return;
       }
 
       try {
         const response = await axios.get('http://localhost:3000/cart', {
-          headers: {
-            Authorization: `Bearer ${token}` // Send token for authentication
-          }
+          headers: { Authorization: `Bearer ${token}` }
         });
 
-        console.log('Cart items fetched:', response.data.data);
-        setCartItems(response.data.data || []); // Ensure we always set cartItems to an array
+        setCartItems(response.data.data || []);
+        calculateTotalPrice(response.data.data);
       } catch (error) {
-        console.error('Error fetching cart items:', error.response);
         setError(`Error fetching cart items: ${error.response ? error.response.data.msg : error.message}`);
       }
     };
@@ -33,51 +33,87 @@ function Cart() {
     fetchCartItems();
   }, []);
 
-  // Function to update the quantity of an item
+  const calculateTotalPrice = (items) => {
+    const total = items.reduce((sum, item) => sum + (item.storeitem.price * item.quantity), 0);
+    setTotalPrice(total);
+  };
+
   const handleUpdateQuantity = async (itemId, newQuantity) => {
-    const token = localStorage.getItem('token'); // Get token from local storage
+    const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.put(`http://localhost:3000/cart/${itemId}`, {
+      await axios.put(`http://localhost:3000/cart/${itemId}`, {
         quantity: newQuantity
       }, {
-        headers: {
-          Authorization: `Bearer ${token}` // Send token for authentication
-        }
+        headers: { Authorization: `Bearer ${token}` }
       });
 
-      // Update cartItems state after successful update
       setCartItems(prevItems =>
-        prevItems.map(item =>
-          item.id === itemId ? { ...item, quantity: newQuantity } : item
-        )
+        prevItems.map(item => (item.id === itemId ? { ...item, quantity: newQuantity } : item))
       );
-
-      console.log('Quantity updated:', response.data);
+      calculateTotalPrice(cartItems);
     } catch (error) {
-      console.error('Error updating quantity:', error.response);
       setError(`Error updating quantity: ${error.response ? error.response.data.msg : error.message}`);
     }
   };
 
-  // Function to delete an item from the cart
   const handleDeleteItem = async (itemId) => {
-    const token = localStorage.getItem('token'); // Get token from local storage
+    const token = localStorage.getItem('token');
 
     try {
-      const response = await axios.delete(`http://localhost:3000/cart/${itemId}`, {
-        headers: {
-          Authorization: `Bearer ${token}` // Send token for authentication
-        }
+      await axios.delete(`http://localhost:3000/cart/${itemId}`, {
+        headers: { Authorization: `Bearer ${token}` }
       });
 
-      // Update cartItems state after successful deletion
       setCartItems(prevItems => prevItems.filter(item => item.id !== itemId));
-
-      console.log('Item deleted:', response.data);
+      calculateTotalPrice(cartItems);
     } catch (error) {
-      console.error('Error deleting item:', error.response);
       setError(`Error deleting item: ${error.response ? error.response.data.msg : error.message}`);
+    }
+  };
+
+  const handleProceedToPayment = async () => {
+    const token = localStorage.getItem('token');
+
+    try {
+      // Prepare to check stock availability before proceeding
+      const stockCheckPromises = cartItems.map(item =>
+        axios.post('http://localhost:3000/stock/stock1', {
+          storeItemId: item.storeItemId,
+          quantity: item.quantity
+        }, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+      );
+
+      // Check if all items have sufficient stock
+      await Promise.all(stockCheckPromises);
+
+      // Create a new bill using the provided API
+      const billData = {
+        totalprice: totalPrice,
+        status: 'WAITING'
+      };
+
+      // Send the bill data without including the totalprice in the URL
+      const billResponse = await axios.post('http://localhost:3000/bill', billData, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      if (!billResponse.data.result) {
+        throw new Error(`Error creating bill: ${billResponse.data.msg}`);
+      }
+
+      // After successfully creating the bill, navigate to the payment page
+      navigate('/Payment', {
+        state: {
+          cartItems,
+          totalPrice
+        }
+      });
+    } catch (error) {
+      // Provide a more informative error message
+      setError(`Error processing payment: ${error.response ? error.response.data.msg : error.message || "Unknown error occurred."}`);
     }
   };
 
@@ -90,28 +126,49 @@ function Cart() {
   }
 
   return (
-    <div>
-      <h1>Your Cart</h1>
-      <ul>
-        {cartItems.map(item => (
-          <li key={item.id}>
-            <h2>{item.storeitem ? item.storeitem.name : 'Product name not available'}</h2>
-            <p>Quantity: {item.quantity}</p>
-            <p>Price: ${item.storeitem ? item.storeitem.price : 'Price not available'}</p>
-            {/* Update Quantity Input */}
-            <input
-              type="number"
-              value={item.quantity}
-              onChange={(e) => handleUpdateQuantity(item.id, parseInt(e.target.value))}
-              min="1"
-            />
-            {/* Delete Button */}
-            <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-      <Link to="/">Continue Shopping</Link>
-    </div>
+    <>
+      <Navbar1 />
+      <div className="container32">
+        <h1>Your Cart</h1>
+        <ul>
+          {cartItems.map(item => (
+            <li key={item.id}>
+              <h2>{item.storeitem ? item.storeitem.name : 'Product name not available'}</h2>
+              <p>Quantity: {item.quantity}</p>
+              <p>Price: ${item.storeitem ? item.storeitem.price : 'Price not available'}</p>
+              <div className='quantity-container'>
+                <button className="btn btn-active bg-[#DEAC80] text-white btn-sm"onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)} >
+                -
+                </button>
+                <input
+                  type="number"
+                  value={item.quantity}
+                  onChange={(e) => handleUpdateQuantity(item.id, parseInt(e.target.value))}
+                  min="1"
+                  className='putin'
+                />
+                <button onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)} className="btn btn-active bg-[#603F26] text-white btn-sm">
+                +
+                </button>
+              </div>
+              <button className="btn btn-active bg-[#DEAC80] text-white ml-[85%] mt-10" onClick={() => handleDeleteItem(item.id)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+        <h3>Total Price: ${totalPrice}</h3>
+        <div className='button-container123'>
+          <Link to="/">
+            <button className="btn btn-active bg-[#F8C794] text-white ">Continue Shopping</button>
+          </Link>
+          <Link to='/Payment'>
+            <button className="btn btn-active bg-[#6F5039] text-white" onClick={handleProceedToPayment}>Buy</button>
+          </Link>
+        </div>
+
+      </div>
+
+    </>
+
   );
 }
 
