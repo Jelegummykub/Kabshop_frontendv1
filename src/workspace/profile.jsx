@@ -1,5 +1,3 @@
-import { faPenClip } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Navbar1 from '../components/navbar1';
@@ -17,51 +15,45 @@ function Profile() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                // Retrieve the token from local storage
-                const yourToken = localStorage.getItem('token'); // Adjust the key as necessary
-        
-                // Check if the token exists
+                const yourToken = localStorage.getItem('token');
                 if (!yourToken) {
                     throw new Error('No authentication token found');
                 }
-        
+
                 const response = await axios.get('http://localhost:3000/auth/@me', {
                     headers: {
-                        Authorization: `Bearer ${yourToken}`, // Use the token
+                        Authorization: `Bearer ${yourToken}`,
                     },
                     withCredentials: true,
                 });
-        
+
+                console.log(response.data); // Check the response here
+
                 if (response.data.result) {
-                    const { email, name, surname, tel, address } = response.data.user;
+                    const {
+                        email = '',
+                        name = '',
+                        surname = '',
+                        tel = '',
+                        address = ''
+                    } = response.data.user;
+
                     setFromData({
                         email,
                         name,
                         surname,
-                        tel: tel || '',
-                        address: address || '',
+                        tel,
+                        address,
                     });
                 } else {
                     alert('Failed to fetch user data: ' + response.data.msg);
                 }
             } catch (error) {
                 console.error('Error fetching user data:', error);
-        
-                if (error.response) {
-                    console.error('Response error:', error.response.data);
-                    alert('Error fetching user data: ' + (error.response.data.msg || 'Bad Request'));
-                } else if (error.request) {
-                    console.error('No response received:', error.request);
-                    alert('No response from the server. Please try again.');
-                } else {
-                    console.error('Error in setup:', error.message);
-                    alert('Error in fetching user data: ' + error.message);
-                }
             }
         };
-        
         fetchUserData();
-    }, []); // Empty dependency array means this runs once on mount
+    }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -73,7 +65,7 @@ function Profile() {
             const response = await axios.put('http://localhost:3000/auth/@me', fromData, {
                 withCredentials: true
             });
-            
+
             if (response.data.result) {
                 alert('Data saved successfully!');
                 // Re-fetch user data after saving
@@ -96,10 +88,6 @@ function Profile() {
                         <div className='picprofile'>
                             <img src="/pigg/sommai.jpg" alt="Profile" />
                         </div>
-                        <div style={{ margin: 30 }}>
-                            <FontAwesomeIcon icon={faPenClip} style={{ color: "#afafaf" }} />
-                            <span>Edit Profile</span>
-                        </div>
                     </div>
                     <div className='containerfrom1'>
                         <div className='laoutfront'>
@@ -109,7 +97,7 @@ function Profile() {
                             <label>Email: </label>
                             <input
                                 className="input-field"
-                                type="email"
+                                type="text"
                                 name="email"
                                 value={fromData.email}
                                 onChange={handleInputChange}
@@ -142,7 +130,7 @@ function Profile() {
                             <label>Tel: </label>
                             <input
                                 className="input-field"
-                                type="tel"
+                                type="number"
                                 name="tel"
                                 value={fromData.tel}
                                 onChange={handleInputChange}
@@ -160,9 +148,9 @@ function Profile() {
                                 placeholder="Enter your address"
                             />
                         </div>
-                        <div className='laoutbutton'>
+                        {/* <div className='laoutbutton'>
                             <button className="btn btn-neutral" onClick={handleSubmit}>บันทึกข้อมูล</button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

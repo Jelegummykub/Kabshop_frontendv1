@@ -134,11 +134,15 @@ function Cart() {
           {cartItems.map(item => (
             <li key={item.id}>
               <h2>{item.storeitem ? item.storeitem.name : 'Product name not available'}</h2>
-              <p>Quantity: {item.quantity}</p>
-              <p>Price: ${item.storeitem ? item.storeitem.price : 'Price not available'}</p>
+              <div className='w-[20%] h-[20%] m-5 flex flex-row gap-[50%]'>
+                <img src={item.storeitem.image} alt={item.storeitem.image} />
+                <p className='font-bold'>{item.storeitem.discription}</p>
+              </div>
+              <p><label className='font-bold'>Quantity: </label>{item.quantity}</p>
+              <p><label className='font-bold'>Price: $</label> {item.storeitem ? item.storeitem.price : 'Price not available'}</p>
               <div className='quantity-container'>
-                <button className="btn btn-active bg-[#DEAC80] text-white btn-sm"onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)} >
-                -
+                <button className="btn btn-active bg-[#DEAC80] text-white btn-sm" onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)} >
+                  -
                 </button>
                 <input
                   type="number"
@@ -148,7 +152,7 @@ function Cart() {
                   className='putin'
                 />
                 <button onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)} className="btn btn-active bg-[#603F26] text-white btn-sm">
-                +
+                  +
                 </button>
               </div>
               <button className="btn btn-active bg-[#DEAC80] text-white ml-[85%] mt-10" onClick={() => handleDeleteItem(item.id)}>Delete</button>

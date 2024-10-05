@@ -39,10 +39,10 @@ function Register() {
       
       // ตรวจสอบการตอบกลับจาก API
       if (response.status === 200) {
-        alert('Registration successful');
+        alert('ทำการสมัครสำเร็จ');
         // ทำการรีเซ็ตฟอร์มหรือเปลี่ยนหน้า
       } else {
-        alert('Registration failed');
+        alert('สมัครไม่สำเร็จ');
       }
     } catch (error) {
       // แสดงข้อความจากเซิร์ฟเวอร์ถ้ามี

@@ -82,7 +82,7 @@ function Home() {
                             src="/pigg/image2.png" />
                     </div>
                 </div>
-                <div className='container1'>
+                {/* <div className='container1'>
                     <div className='cat'>
                         <h2>Best Seller</h2>
                     </div>
@@ -106,7 +106,7 @@ function Home() {
                         <button className="carousel-control left" onClick={prevSlide}>❮</button>
                         <button className="carousel-control right" onClick={nextSlide}>❯</button>
                     </div>
-                </div>
+                </div> */}
             </div>
         </>
     );

@@ -52,7 +52,7 @@ function Product() {
           Authorization: `Bearer ${token}` // Send the token in the request header
         }
       });
-      alert('Add Product Success')
+      alert(' เพิ่มสินค้าสำเร็จ ')
       console.log('Product added to cart:', response.data);
       // Optionally redirect to cart or show a success message
     } catch (error) {

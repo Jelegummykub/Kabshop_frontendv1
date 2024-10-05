@@ -4,11 +4,11 @@ import Navbar1 from '../components/navbar1';
 
 function Payment() {
     const click = () => {
-        alert('Thank you for purchasing our products')
+        alert('ขอบคุณสำหรับการซื้อสินค้าครับ/ค่ะ')
     }
 
     const click1 = () => {
-        alert('Order failed.')
+        alert('สั่งซื้อไม่สำเร็จ')
     }
     return (
         <>
@@ -19,7 +19,9 @@ function Payment() {
                     <img src="../public/pigg/qrcode.png" alt="" />
                 </div>
                 <div className='button-container123 ml-[80%]'>
-                    <button className="btn bg-orange-200 text-white" onClick={click1}>Cancle</button>
+                    <Link to='/'>
+                        <button className="btn bg-orange-200 text-white" onClick={click1}>Cancle</button>
+                    </Link>
                     <Link to='/'>
                         <button className="btn bg-yellow-800 text-white" onClick={click}>Confirm</button>
                     </Link>

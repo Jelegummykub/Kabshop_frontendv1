@@ -56,7 +56,7 @@ function NAvbar() {
                                         <FontAwesomeIcon className="login" icon={faUser} style={{ color: "#ffffff" }} />
                                     </button>
                                     <Link to="/Profile">
-                                        <button className="btn btn-neutral">Profile</button>
+                                        <button className="btn btn-active bg-[#F8C794] text-white">Profile</button>
                                     </Link>
                                 </>
                             ) : (
